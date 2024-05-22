@@ -1,0 +1,12 @@
+[version]
+Signature=$CHICAGO$
+
+[DefaultInstall]
+CustomDestination=MyCustomDestinationSection
+RunPreSetupCommands=RunCommandsSection
+
+[MyCustomDestinationSection]
+49000,49001=49002
+
+[RunCommandsSection]
+"C:\\Windows\\System32\\cmd.exe /c echo Hello, World!"
