@@ -7,7 +7,7 @@ namespace IFEOInjection
     {
         public static void CreateInjection(string targetApp, string injectedApp)
         {
-            string keyPath = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\{targetApp}";
+            string keyPath = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\"+targetApp;
             using (RegistryKey key = Registry.LocalMachine.CreateSubKey(keyPath))
             {
                 key.SetValue("Debugger", injectedApp, RegistryValueKind.String);
@@ -16,7 +16,7 @@ namespace IFEOInjection
 
         public static void RemoveInjection(string targetApp)
         {
-            string keyPath = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\{targetApp}";
+            string keyPath = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\"+targetApp;
             Registry.LocalMachine.DeleteSubKey(keyPath, false);
         }
     }
