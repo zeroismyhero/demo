@@ -1,5 +1,5 @@
 # C# code for CreateRemoteThread Injection with API Hashing
-$remoteThreadInjectionCode = @"
+$remoteApiThreadCode = @"
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -127,7 +127,7 @@ public class RemoteApiHashingThreadInjection
 "@
 
 # Add the C# code to PowerShell
-Add-Type -TypeDefinition $remoteThreadInjectionCode -Language CSharp
+Add-Type -TypeDefinition $remoteApiThreadCode -Language CSharp
 
 function Invoke-RemoteThreadApiHashing {
     param (
