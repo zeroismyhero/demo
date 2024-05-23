@@ -1,0 +1,43 @@
+Set objArgs = WScript.Arguments
+
+If objArgs.Count < 2 Then
+    WScript.Echo "Usage: cscript.exe DownloadAndExecute.vbs <URL> <FilePath>"
+    WScript.Quit 1
+End If
+
+strURL = objArgs(0)
+strFilePath = objArgs(1)
+
+On Error Resume Next
+Set objXMLHTTP = CreateObject("MSXML2.ServerXMLHTTP")
+Set objADOStream = CreateObject("ADODB.Stream")
+Set objFSO = CreateObject("Scripting.FileSystemObject")
+
+objXMLHTTP.open "GET", strURL, False
+objXMLHTTP.send
+
+If objXMLHTTP.Status = 200 Then
+    objADOStream.Open
+    objADOStream.Type = 1 ' adTypeBinary
+
+    objADOStream.Write objXMLHTTP.responseBody
+    objADOStream.Position = 0
+
+    If objFSO.FileExists(strFilePath) Then
+        objFSO.DeleteFile strFilePath
+    End If
+    objADOStream.SaveToFile strFilePath
+    objADOStream.Close
+
+    Set objShell = CreateObject("WScript.Shell")
+    objShell.Run strFilePath, 1, False
+
+    WScript.Echo "File downloaded and executed successfully."
+Else
+    WScript.Echo "Failed to download file. Status: " & objXMLHTTP.Status
+End If
+
+If Err.Number <> 0 Then
+    WScript.Echo "Error: " & Err.Description
+End If
+On Error GoTo 0
