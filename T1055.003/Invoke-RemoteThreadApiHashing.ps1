@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 
-public class RemoteThreadInjection
+public class RemoteApiHashingThreadInjection
 {
     [UnmanagedFunctionPointer(CallingConvention.StdCall)]
     private delegate IntPtr OpenProcessDelegate(uint processAccess, bool bInheritHandle, int processId);
